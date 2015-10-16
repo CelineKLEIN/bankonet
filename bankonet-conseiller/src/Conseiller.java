@@ -1,0 +1,271 @@
+//import java.io.BufferedReader;
+//import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+//import java.io.FileNotFoundException;
+//import java.io.FileReader;
+//import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+import java.util.Scanner;
+
+import com.bankonet.Civilite;
+import com.bankonet.Client;
+import com.bankonet.CompteCourant;
+
+
+public class Conseiller {
+
+	//affiche l'application conseiller bancaire
+	public static void main(String[] args) throws IOException {
+		
+		
+		Scanner sc = new Scanner(System.in);
+		int valueChoose = 0;
+		
+		
+		
+		
+		
+		do{
+		System.out.println("***** APPLICATION CONSEILLER BANCAIRE *****");
+		System.out.println("0. Arrêter le programme");
+		System.out.println("1. Ouvrir un compte courant");
+		System.out.println("2. Lister tous les clients");
+		System.out.println("Veuillez choisir une action");
+		valueChoose =sc.nextInt();
+	
+	switch(valueChoose){
+
+	case 1:
+		System.out.println("Ouvrir un compte courant");
+		renseignement();
+		break;
+		
+	case 2:
+		System.out.println("Lister tous les clients");
+		listClient(args);
+		break;
+		
+	
+	}	
+	
+	}while (valueChoose !=0);
+	
+	System.out.println("Arrêt de l'application");
+	}
+	
+
+
+
+
+
+	//demande les renseignements pour créer un nouveau compte
+	private static void renseignement() {
+		Scanner sc = new Scanner(System.in);
+		String nom;
+		String prenom;
+		String login;
+
+		
+		StringBuilder sb = new StringBuilder();
+		
+		System.out.println("Saisie du nom du client");
+		nom = sc.nextLine();
+		System.out.println("Saisie du prénom du client");
+		prenom = sc.nextLine();
+		System.out.println("Saisie du login du client");
+		login = sc.nextLine();
+		
+		sb.append(nom.toUpperCase());
+		sb.append('_');
+		sb.append(prenom.toUpperCase());
+		sb.append('_');
+		sb.append("COURANT_1");
+
+		
+		System.out.println(sb);
+		
+
+	
+		Client client1 = new Client(nom, prenom, login, Civilite.MONSIEUR);
+		
+	//	client1.nbCompte();
+
+	//	CompteCourant cc1 = new CompteCourant(login, login, 0, 0);
+		
+		
+		
+		CompteCourant cc1 = new CompteCourant(login, login, 0, 0);
+		
+	
+		sauvegarde(client1);
+		
+		
+	}
+	
+	//sauvegarde de données dans clients.properties
+	/*private static void sauvegarde(String nom, String prenom, String login, CompteCourant cc1){
+		String fichier = System.getProperty("user.dir");
+		
+			try{
+				FileWriter fw = new FileWriter("clients.properties", true);
+				BufferedWriter output = new BufferedWriter(fw);
+				output.write(login);
+				output.write("=nom:");
+				output.write(nom);
+				output.write("&prenom:");
+				output.write(prenom);
+				output.write("&comptes_courant:");
+				
+				//nbCompte = client.nbCompte();
+			
+				output.flush();
+				output.close();
+				System.out.println("fichier crée");
+			}
+			catch(IOException ioe){
+				System.out.print("Erreur : ");
+				ioe.printStackTrace();
+				}
+				}
+*/
+	//sauvegarde des clients
+
+	public static void sauvegarde(Client client1) {
+
+		Properties prop = new Properties();
+		OutputStream output = null;
+		InputStream input = null;
+
+		try {
+
+			input = new FileInputStream("clients.properties");
+
+			// load a properties file
+			prop.load(input);
+
+			// 
+			prop.setProperty(client1.getIdentifiant(), structure(client1.getNom(), client1.getPrenom(), client1));
+			
+			output = new FileOutputStream("clients.properties");
+			prop.store(output, null);
+			
+
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		} finally {
+			if (input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	  }
+
+
+	private static String structure(String nom, String prenom, Client client1) {
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("=nom:");
+		sb.append(nom);
+		sb.append("&prenom:");
+		sb.append(prenom);
+		sb.append("&comptes_courant:");
+		return sb.toString();
+
+		
+
+	}
+
+
+	// affiche tous les clients
+/*		private static void listClient(Client client1) {
+			
+			Properties prop = new Properties();
+			OutputStream output = null;
+			InputStream input = null;
+
+			try {
+
+				input = new FileInputStream("clients.properties");
+
+				// load a properties file
+				prop.load(input);
+
+				// 
+				prop.setProperty((client1.getIdentifiant()), structure(client1.getNom(), client1.getPrenom(), client1));
+				
+				output = new FileOutputStream("clients.properties");
+				prop.store(output, null);
+				
+
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			} finally {
+				if (input != null) {
+					try {
+						input.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} 
+				 }
+			}*/
+
+	
+private static Properties load(String string) throws IOException, FileNotFoundException{
+  Properties properties = new Properties();
+
+  FileInputStream input = new FileInputStream("clients.properties"); 
+  try{
+
+     properties.load(input);
+     return properties;
+
+  }
+
+          finally{
+
+     input.close();
+
+  }
+
+
+}
+
+  private static void listClient(String[] args) {
+	  
+
+      try{
+         // chargement des propriétés
+         Properties prop = Conseiller.load("clients.properties");
+
+         // Affichage des propriétés
+         // Récupère la propriété ma.cle
+         // Si la propriété n'existe pas, retourne la valeur par défaut "vide"
+         System.out.print(prop.getProperty("nom"));
+      }
+      catch(Exception e){
+         e.printStackTrace();
+      }
+ 
+
+}
+
+}
+
+	
+	
+
+
+
