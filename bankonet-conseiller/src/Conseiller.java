@@ -27,8 +27,7 @@ public class Conseiller {
 		
 		Scanner sc = new Scanner(System.in);
 		int valueChoose = 0;
-		
-		
+
 		
 		
 		
