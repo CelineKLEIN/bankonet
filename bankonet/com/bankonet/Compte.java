@@ -20,7 +20,9 @@ public abstract class Compte implements CompteStat {
 			
 	}
 
-	
+	public String getNumero() {
+		return numero;
+	}
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
