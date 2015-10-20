@@ -12,7 +12,9 @@ import java.util.Properties;
 import com.bankonet.Client;
 import com.bankonet.CompteCourant;
 
-public class ClientDaoFile  implements ClientDao{
+import metier.CompteService;
+
+public class ClientDaoFile  implements ClientDao {
 
 	@Override
 	public List<Client> findAll() {
@@ -38,7 +40,7 @@ public class ClientDaoFile  implements ClientDao{
 			prop.load(input);
 
 			// 
-			prop.setProperty(client1.getIdentifiant(), structure(client1.getNom(), client1.getPrenom(), client1, compte1));
+			prop.setProperty(client1.getIdentifiant().toString(), structure(client1.getNom(), client1.getPrenom(), client1, compte1));
 			
 			output = new FileOutputStream("clients.properties");
 			prop.store(output, null);
@@ -68,8 +70,7 @@ public class ClientDaoFile  implements ClientDao{
 		sb.append("&prenom:");
 		sb.append(prenom);
 		sb.append("&comptes_courant:");
-		sb.append(compte1);
-	
+		sb.append(compte1.getNumero());
 		return sb.toString();
 
 		

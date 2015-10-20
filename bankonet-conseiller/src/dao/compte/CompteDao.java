@@ -3,6 +3,7 @@ package dao.compte;
 import java.util.List;
 
 import com.bankonet.Compte;
+import com.bankonet.CompteException;
 
 
 public interface CompteDao {

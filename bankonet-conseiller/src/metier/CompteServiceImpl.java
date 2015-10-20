@@ -4,6 +4,7 @@ import java.util.Set;
 
 import com.bankonet.Compte;
 import com.bankonet.CompteCourant;
+import com.bankonet.CompteException;
 
 import dao.compte.CompteDao;
 

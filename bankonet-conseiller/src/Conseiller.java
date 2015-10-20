@@ -71,7 +71,7 @@ public class Conseiller {
 		String nom;
 		String prenom;
 		String login;
-
+		String identifiant;
 		
 		StringBuilder sb = new StringBuilder();
 		
@@ -91,9 +91,9 @@ public class Conseiller {
 		
 		System.out.println(sb);
 		
-
+		identifiant = nom+"_"+prenom;
 	
-		Client client1 = new Client(nom, prenom, login, Civilite.MONSIEUR);
+		Client client1 = new Client(nom, prenom, login, Civilite.MONSIEUR, identifiant);
 		
 	//	client1.nbCompte();
 

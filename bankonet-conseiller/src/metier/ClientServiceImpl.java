@@ -1,5 +1,7 @@
 package metier;
 
+import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.Set;
 
 import com.bankonet.Civilite;
@@ -7,10 +9,13 @@ import com.bankonet.Client;
 import com.bankonet.CompteCourant;
 
 import dao.client.ClientDao;
+import dao.compte.CompteDao;
 
 public class ClientServiceImpl implements ClientService {
 	
+	
 	private ClientDao clientDao;
+	private CompteDao compteDao;
 
 	public ClientServiceImpl(ClientDao clientDao) {
 		this.clientDao = clientDao;
@@ -19,7 +24,7 @@ public class ClientServiceImpl implements ClientService {
 	@Override
 	public Set<Client> findAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return new HashSet<>(clientDao.findAll());
 	}
 
 	@Override
@@ -29,9 +34,10 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
-	public void creerClient(String nom, String prenom, String login, Civilite civilite) {
+	public void creerClient(String nom, String prenom, String login, Civilite civilite, String identifiant) throws SQLException {
 		// TODO Auto-generated method stub
-		Client client1 = new Client(nom, prenom, login, civilite);
+		Client client1 = new Client(nom, prenom, login, civilite, identifiant);
+
 		// rattacher le code au client
 		clientDao.save(client1, null);
 	}
