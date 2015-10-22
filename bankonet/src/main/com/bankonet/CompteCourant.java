@@ -1,0 +1,43 @@
+package src.main.com.bankonet;
+
+public class CompteCourant extends Compte {
+	
+	private double montantDecouvertAutorise;
+	private static int nbComptesCourants = 0;
+	
+
+	
+	public CompteCourant(String numero, String intitule, double solde, double montantDecouvertAutorise){
+		super(numero, intitule, solde);
+
+		this.montantDecouvertAutorise=montantDecouvertAutorise;
+		nbComptesCourants++;
+
+		
+	}
+	
+
+	public String toString(){
+		return this.getIntitule();
+	}
+
+
+	public double getMontantDecouvertAutorise() {
+		return montantDecouvertAutorise;
+	}
+
+
+	public void setMontantDecouvertAutorise(double montantDecouvertAutorise) {
+		this.montantDecouvertAutorise = montantDecouvertAutorise;
+	}
+	
+	public static int getNbComptesCourants() {
+		return nbComptesCourants;
+	}
+
+
+	public static void setNbComptesCourants(int nbComptesCourants) {
+		CompteCourant.nbComptesCourants = nbComptesCourants;
+	}
+
+}
