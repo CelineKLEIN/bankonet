@@ -1,0 +1,19 @@
+package metier;
+
+import com.bankonet.Client;
+
+import dao.client.ClientDao;
+
+public class InitService {
+
+	private ClientDao clientDao;
+	
+	public void init(){
+		
+		Client cl = new Client();
+		cl.setNom("Guery");
+		cl.setPrenom("Sophie");
+		emf.persist(cl);
+		
+	}
+}

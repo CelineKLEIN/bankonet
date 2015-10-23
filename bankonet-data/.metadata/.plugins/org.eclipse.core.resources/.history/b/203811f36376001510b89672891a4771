@@ -1,0 +1,42 @@
+package dao.client;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.util.List;
+
+import com.bankonet.Client;
+import com.bankonet.CompteCourant;
+
+public class ClientDaoMySQL implements ClientDao{
+
+	@Override
+	public List<Client> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void save(Client client1, CompteCourant compte1) {
+		// TODO Auto-generated method stub
+		
+		try{
+			Class.forName("com.mysql.jdbc.Driver");
+
+			Connection connection = DriverManager.getConnection("jdbc:mysql:localhost:3306/bankonetdb","root","");
+	
+			Statement statement = connection.createStatement();
+			
+			// Supprimer tous les clients
+
+			int nbClientsSuppr = statement.executeUpdate("DELETE FROM Client");
+
+			System.out.println(nbClientsSuppr + " clients supprimés");
+		}catch (Exception e){
+			
+		}
+		
+	}
+
+
+}

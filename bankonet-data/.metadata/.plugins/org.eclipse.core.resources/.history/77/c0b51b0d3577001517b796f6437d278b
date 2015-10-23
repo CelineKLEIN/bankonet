@@ -1,0 +1,22 @@
+package dao.client;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.bankonet.Client;
+import com.bankonet.CompteCourant;
+
+public class ClientDaoJpa implements ClientDao {
+
+	@Override
+	public List<Client> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void save(Client client1, CompteCourant compte1) throws SQLException {
+System.out.println("ClientDaoJpa");
+	}
+
+}

@@ -29,20 +29,73 @@
 			<artifactId>bankonet</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.2</version>
+			<scope>test</scope>
+		</dependency>
 
 	</dependencies>
 
 	<build>
 		<pluginManagement>
 			<plugins>
+			<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.4.1</version>
+        </plugin>
 				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<configuration>
 						<source>1.8</source>
 						<target>1.8</target>
+				
 					</configuration>
+					
 				</plugin>
-			</plugins>
-		</pluginManagement>
+				
+				  
+     	<plugin>
+        	<groupId>org.apache.maven.plugins</groupId>
+        	<artifactId>maven-jar-plugin</artifactId>
+       
+        	<configuration>
+         	 <archive>
+           	 <manifest>
+             	 <addClasspath>true</addClasspath>
+             	<mainClass>ihm.ConsoleApp</mainClass>
+             </manifest>
+         	 </archive>
+        	</configuration>
+       
+     	</plugin>
+      
+   
+      
+       
+	</plugins>
+</pluginManagement>
+		
+		<plugins>
+			 <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.4.1</version>
+        <configuration>
+          <!-- put your configurations here -->
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      </plugins>
 	</build>
 </project>

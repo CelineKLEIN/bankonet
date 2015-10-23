@@ -1,0 +1,14 @@
+package metier;
+
+import java.util.Set;
+
+import com.bankonet.Compte;
+
+public interface CompteService {
+
+	Object compte1 = null;
+	void creerCompte(String numero, String intitule, double solde, double montantDecouvertAutorise);
+	Set<Compte> findAll();
+	void delete();
+
+}

@@ -1,0 +1,35 @@
+package metier;
+
+import java.sql.SQLException;
+
+import com.bankonet.Client;
+
+import dao.client.ClientDao;
+
+public class InitService {
+
+	private ClientDao clientDao;
+	
+	
+	
+	public InitService(ClientDao clientDao) {
+		super();
+		this.clientDao = clientDao;
+	}
+
+
+
+	public void init(){
+		
+		Client cl = new Client();
+		cl.setNom("Guery");
+		cl.setPrenom("Sophie");
+		try {
+			clientDao.save(cl, null);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+}

@@ -1,0 +1,78 @@
+package ihm;
+
+import java.sql.SQLException;
+import java.util.Scanner;
+
+import com.bankonet.Civilite;
+
+import dao.DaoFactory;
+import dao.DaoFactoryFile;
+import dao.DaoFactoryMySQL;
+import metier.ClientService;
+import metier.ClientServiceImpl;
+
+public class OuvrirCompteCourantCommand extends IhmCommand{
+
+	private DaoFactory daoFactory = new DaoFactoryFile();
+	private DaoFactory daoFactory1 = new DaoFactoryMySQL();
+	private ClientService clientService = new ClientServiceImpl(daoFactory.getClientDao());
+	private ClientService clientService1 = new ClientServiceImpl(daoFactory1.getClientDao());
+	
+	@Override
+	public Integer getId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getLibelle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	void execute() throws SQLException {
+			Scanner sc = new Scanner(System.in);
+			String nom;
+			String prenom;
+			String login;
+
+			
+			StringBuilder sb = new StringBuilder();
+			
+			for()
+			System.out.println("Saisie du nom du client");
+			nom = sc.nextLine();
+			System.out.println("Saisie du prénom du client");
+			prenom = sc.nextLine();
+			System.out.println("Saisie du login du client");
+			login = sc.nextLine();
+			System.out.println("Civilité ? (1 si homme, 2 si femme, ...)");
+			Integer civ = sc.nextInt();
+			
+			Civilite civilite = Civilite.MADEMOISELLE;
+			if(civ == 1) {
+				civilite = Civilite.MONSIEUR;
+
+				
+			}
+			
+			sb.append(nom.toUpperCase());
+			sb.append('_');
+			sb.append(prenom.toUpperCase());
+			sb.append('_');
+			sb.append("COURANT_1");
+
+			
+			System.out.println(sb);
+			
+				
+			clientService1.creerClient(nom, prenom, login, civilite);
+		
+			
+		}
+
+			
+		
+	}
+

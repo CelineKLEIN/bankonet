@@ -1,0 +1,155 @@
+package com.bankonet;
+
+import java.lang.reflect.Field;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+
+
+@Entity
+@Table(name="client")
+public class Client<E> {
+	
+	@Id
+	@GeneratedValue
+	private Integer identifiant;
+	
+	private String nom;
+	
+	private String prenom;
+	//@ToString private String identifiant;
+	private Civilite civil;
+	
+	private String login;
+	
+	private String password;
+	
+	private Map<String, Compte> comptesMap  = new HashMap<String, Compte>();
+	
+	public Client(){
+		
+	}
+
+	public Client(String nom, String prenom, String login, Civilite civil) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.login = login;
+		this.civil = civil;
+	}
+	
+/*	public void creerCompte(Compte compte) {
+		comptesMap.put(compte.getNumero(), compte);
+	}
+	*/
+	public void supprimerCompte(Compte compte) {
+		comptesMap.remove(compte.getNumero());
+	}
+	
+	public Compte retournerCompte(String numero) throws CompteNonTrouveException {
+		Compte compteRecherche = (Compte) comptesMap.get(numero);
+	
+		if(compteRecherche == null) {
+			throw new CompteNonTrouveException();
+		}
+		
+		return compteRecherche;
+	}
+	
+	
+	public void supprimerCompte(String numero) throws CompteNonTrouveException {
+		Compte compteRecherche = retournerCompte(numero);
+		comptesMap.remove(compteRecherche.getNumero());
+	}
+	
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public Integer getIdentifiant() {
+		return identifiant;
+	}
+
+	public void setIdentifiant(Integer identifiant) {
+		this.identifiant = identifiant;
+	}
+
+	public Collection getComptesList() {
+		return comptesMap.values();
+	}
+
+	
+	
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	@Override
+	public String toString() {
+		
+		StringBuilder sb = new StringBuilder("Client[");
+		for(Field champ : Client.class.getDeclaredFields()){
+			ToString toStringAnn = champ.getAnnotation(ToString.class);
+			if(toStringAnn != null){
+				sb.append(champ.getName());
+				sb.append("=");
+				try{
+					if(toStringAnn.uppercase()){
+						sb.append(champ.get(this).toString().toUpperCase());
+					} else{
+						sb.append(champ.get(this));		
+					}
+				}catch(IllegalArgumentException | IllegalAccessException e){
+					e.printStackTrace();
+				}
+				
+			}
+			sb.append("=");
+		}
+			return sb.toString();
+		}
+
+		
+		static {
+			
+		}
+
+
+		public Object nbCompte() {
+			
+			return comptesMap.size();
+		}
+		
+		
+		}

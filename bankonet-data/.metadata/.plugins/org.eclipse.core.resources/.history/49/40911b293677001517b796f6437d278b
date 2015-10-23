@@ -1,0 +1,23 @@
+package ihm;
+
+public class ListerTousLesClientsCommand extends IhmCommand{
+
+	@Override
+	public Integer getId() {
+		// TODO Auto-generated method stub
+		return 2;
+	}
+
+	@Override
+	public String getLibelle() {
+		// TODO Auto-generated method stub
+		return "Lister les clients";
+	}
+
+	@Override
+	void execute() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,36 @@
+package ihm;
+
+import java.sql.SQLException;
+
+import metier.ClientService;
+
+public class RechercheUnNomClientCommand extends IhmCommand{
+
+	private ClientService clientService;
+	
+	
+	public RechercheUnNomClientCommand(ClientService clientService) {
+		super();
+		this.clientService = clientService;
+	}
+
+	@Override
+	public Integer getId() {
+		// TODO Auto-generated method stub
+		return 4;
+	}
+
+	@Override
+	public String getLibelle() {
+		// TODO Auto-generated method stub
+		return "Recherche d'un client par nom";
+	}
+
+	@Override
+	void execute() throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+}

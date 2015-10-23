@@ -1,0 +1,51 @@
+package dao.client;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+
+import com.bankonet.Client;
+import com.bankonet.CompteCourant;
+import com.mysql.jdbc.Driver;
+
+public class ClientDaoMySQL implements ClientDao{
+
+	@Override
+	public List<Client> findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void save(Client client1, CompteCourant compte1) throws SQLException {
+		// TODO Auto-generated method stub
+		
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+				//DriverManager.registerDriver(new Driver());
+				Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bankonet","root","");
+				
+				Statement statement = connection.createStatement();
+				
+				// Supprimer tous les clients
+
+				int nbClientInsere = statement.executeUpdate("INSERT INTO Client(Nom, Prénom, Identifiant) VALUES('MONTREUIL','Damien', 1118)");
+
+				System.out.println(nbClientInsere + " client inséré");
+	
+			
+				
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		
+		
+		
+	}
+
+
+}

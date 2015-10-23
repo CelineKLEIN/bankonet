@@ -1,0 +1,22 @@
+package metier;
+
+import javax.persistence.EntityManagerFactory;
+
+import com.bankonet.Client;
+
+import dao.client.ClientDaoJpa;
+
+public class InitService {
+
+	private EntityManagerFactory emf;
+	private ClientDaoJpa clientDaoJpa;
+	
+	public void init(){
+		
+		Client cl = new Client();
+		cl.setNom("Guery");
+		cl.setPrenom("Sophie");
+		emf.persist(cl);
+		
+	}
+}

@@ -1,0 +1,37 @@
+package dao.client;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import com.bankonet.Client;
+import com.bankonet.CompteCourant;
+
+public class ClientDaoJpa implements ClientDao {
+	
+	private EntityManagerFactory emf;
+	
+	
+
+	public ClientDaoJpa() {
+		super();
+		emf = Persistence.createEntityManagerFactory("bankonet-conseiller");
+	}
+
+	@Override
+	public List<Client> findAll() {
+		EntityManager em = emf.createEntityManager();
+		List<Client> resultList = em.createQuery("select * from Client", Client.class).getResultList();
+		em.close();
+		return resultList;
+	}
+
+	@Override
+	public void save(Client client1, CompteCourant compte1) throws SQLException {
+System.out.println("ClientDaoJpa");
+	}
+
+}

@@ -1,0 +1,26 @@
+package ihm;
+
+import java.sql.SQLException;
+
+public class RechercheUnPrenomClientCommand extends IhmCommand {
+
+	@Override
+	public Integer getId() {
+		// TODO Auto-generated method stub
+		return 5;
+	}
+
+	@Override
+	public String getLibelle() {
+		// TODO Auto-generated method stub
+		return "Recherche d'un client par prénom";
+	}
+
+	@Override
+	void execute() throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+}
